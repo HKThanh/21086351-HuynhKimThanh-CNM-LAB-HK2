@@ -40,3 +40,20 @@ app.post('/save', (req, resp) => {
 
     return resp.redirect('/');
 })
+
+app.post('/delete', (req, resp) => {
+    const listCheckBoxesSelected = req.body.id;
+
+    let data = courses;
+
+    if (!listCheckBoxesSelected.length) {
+        return resp.redirect('/');
+    }
+
+    const idsToDelete = Array.isArray(listCheckBoxesSelected) ? listCheckBoxesSelected.map(Number) : [Number(listCheckBoxesSelected)];
+
+    courses = courses.filter(item => !idsToDelete.includes(item.id));
+
+    console.log('Data after deletion: ', JSON.stringify(courses));
+    return resp.redirect('/');
+})
