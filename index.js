@@ -20,3 +20,23 @@ app.get('/', (req, resp) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
+
+app.post('/save', (req, resp) => {
+    const id = Number(req.body.id);
+    const name = req.body.name;
+    const course_type = req.body.course_type;
+    const semester = req.body.semester;
+    const department = req.body.department;
+
+    const params = {
+        "id": id,
+        "name": name,
+        "course_type": course_type,
+        "semester": semester,
+        "department": department
+    }
+
+    courses.push(params);
+
+    return resp.redirect('/');
+})
